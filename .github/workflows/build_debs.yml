@@ -33,6 +33,7 @@ jobs:
   build-debian-buster:    
     runs-on: ubuntu-20.04
     needs: build-source-debs
+    timeout-minutes: 720
     strategy:
       matrix:
         config:
