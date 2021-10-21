@@ -71,8 +71,8 @@ jobs:
         sudo dpkg -i raspbian-archive-keyring_20120528.2_all.deb
     - name: cp pbuilderrc
       run: |
-        cp pbuilderrc $HOME/.pbuilderrc
-        sudo cp pbuilderrc /root/.pbuilderrc
+        cp robotraconteur_debian_build/pbuilderrc $HOME/.pbuilderrc
+        sudo cp robotraconteur_debian_build/pbuilderrc /root/.pbuilderrc
     - name: pbuilder-create
       run: |
         sudo mkdir -p /var/cache/pbuilder/${{ matrix.config.os }}-${{ matrix.config.dist }}-${{ matrix.config.arch }}/aptcache/
