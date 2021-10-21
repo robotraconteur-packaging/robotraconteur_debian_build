@@ -8,8 +8,31 @@ on:
       - created
 
 jobs:
+
+  build-source-debs:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: robotraconteur_debian_build
+    - name: apt update
+      run: sudo apt update
+    - name: apt
+      run: >
+        sudo apt-get install 
+        pbuilder debootstrap devscripts git-buildpackage 
+        debian-keyring  debian-archive-keyring dh-make -qq
+    - name: build source debs
+      run: python3 robotraconteur_debian_build/scripts/build_src_deb.py
+    - name: archive out
+      uses: actions/upload-artifact@v2
+      with:
+        name: 'source-debs'
+        path: out/*
+
   build-debian-buster:    
     runs-on: ubuntu-20.04
+    needs: build-source-debs
     strategy:
       matrix:
         config:
@@ -27,6 +50,12 @@ jobs:
             dist: buster
     steps:
     - uses: actions/checkout@v2
+      with:
+        path: robotraconteur_debian_build
+    - name: Download CI artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: source-debs
     - name: apt update
       run: sudo apt update
     - name: apt
@@ -50,7 +79,7 @@ jobs:
         sudo OS=${{ matrix.config.os }} DIST=${{ matrix.config.dist }} ARCH=${{ matrix.config.arch }} pbuilder --create
     - name: extact-source-deb
       run: |
-        dpkg-source -x robotraconteur_*~buster.dsc src_deb
+        dpkg-source -x source_debs/${{ matrix.config.dist }}/robotraconteur_*~${{ matrix.config.dist }}.dsc src_deb
     - name: pbuilder-build
       working-directory: src_deb
       run: |
