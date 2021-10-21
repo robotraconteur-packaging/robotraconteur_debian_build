@@ -55,7 +55,7 @@ jobs:
     - name: Download CI artifacts
       uses: actions/download-artifact@v2
       with:
-        name: source-debs
+        path: source-debs
     - name: apt update
       run: sudo apt update
     - name: apt
@@ -79,7 +79,7 @@ jobs:
         sudo OS=${{ matrix.config.os }} DIST=${{ matrix.config.dist }} ARCH=${{ matrix.config.arch }} pbuilder --create
     - name: extact-source-deb
       run: |
-        dpkg-source -x source_debs/${{ matrix.config.dist }}/robotraconteur_*~${{ matrix.config.dist }}.dsc src_deb
+        dpkg-source -x source-debs/source-debs/${{ matrix.config.dist }}/robotraconteur_*~${{ matrix.config.dist }}.dsc src_deb
     - name: pbuilder-build
       working-directory: src_deb
       run: |
