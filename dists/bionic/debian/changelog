@@ -1,3 +1,9 @@
+robotraconteur (0.15.3~rc3-1~bionic) bionic; urgency=medium
+
+  * Version v0.15.3-rc3 release
+
+ -- John Wason <wason@wasontech.com>  Fri, 22 Oct 2021 22:59:03 +0000
+
 robotraconteur (0.15.2-1~bionic) bionic; urgency=medium
 
   * Version 0.15.2 beta release
