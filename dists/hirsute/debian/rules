@@ -15,7 +15,7 @@
 
 
 %:
-	dh $@  --builddirectory=build
+	dh $@ --parallel  --builddirectory=build
 
 
 override_dh_auto_configure:
