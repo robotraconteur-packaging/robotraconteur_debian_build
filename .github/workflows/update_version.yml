@@ -11,7 +11,7 @@ on:
         description: Name of release tag
 
 jobs:
-  update-port:
+  update-version:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2

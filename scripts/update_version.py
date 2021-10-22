@@ -42,7 +42,7 @@ def main():
         deb_ver = tag_name_r.group(1) + "-1"
         orig_ver = tag_name_r.group(1)
     else:
-        deb_ver = tag_name_r.group(1) + tag_name_r.group(2).replace("-","~")
+        deb_ver = tag_name_r.group(1) + tag_name_r.group(2).replace("-","~") + "-1"
         orig_ver = tag_name_r.group(1) + tag_name_r.group(2).replace("-","~")
 
     print(f"tag_name: {tag_name}")
