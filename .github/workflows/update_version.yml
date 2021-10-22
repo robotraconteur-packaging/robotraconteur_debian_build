@@ -1,0 +1,34 @@
+name: Update package version
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_repository:
+        required: true
+        description: Repository with source code
+      tag_name:
+        required: true
+        description: Name of release tag
+
+jobs:
+  update-port:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Update package version
+      run: python3 scripts/update_version.py
+      env:
+        INPUT_TAG_NAME: ${{ github.event.inputs.tag_name }}
+        INPUT_SOURCE_REPOSITORY: ${{ github.event.inputs.source_repository }}
+        BOT_GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        title: Update package to ${{ github.event.inputs.source_repository }} ${{ github.event.inputs.tag_name }}
+        token: ${{ secrets.BOT_GITHUB_TOKEN }}
+    
+      
+
+      
+      
+  

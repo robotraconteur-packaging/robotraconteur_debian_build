@@ -22,7 +22,10 @@ def main():
         e_dir.mkdir(parents=True,)
         subprocess.check_call(f"tar xf {orig} --strip-components=1", shell=True, cwd=e_dir)
         shutil.copytree(d.joinpath("debian"),e_dir.joinpath("debian"))
-        os.link(orig,work_dir.joinpath(f"{dist}/{orig.name}"))
+        orig_name = orig.name
+        if "~" in orig_name:
+            orig_name = orig_name.replace(".orig.tar.gz", f"~{dist}.orig.tar.gz")
+        os.link(orig,work_dir.joinpath(f"{dist}/{orig_name}"))
         subprocess.check_call("debuild -S --no-sign --no-check-builddeps", shell=True, cwd=work_dir.joinpath(f"{dist}/robotraconteur_debian"))
 
     for d in work_dir.iterdir():
