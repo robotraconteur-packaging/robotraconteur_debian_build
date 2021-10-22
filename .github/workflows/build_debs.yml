@@ -83,6 +83,7 @@ jobs:
         dpkg-source -x source-debs/source-debs/${{ matrix.config.dist }}/robotraconteur_*~${{ matrix.config.dist }}.dsc src_deb
     - name: pbuilder-build
       working-directory: src_deb
+      timeout-minutes: 720
       run: |
         OS=${{ matrix.config.os }} DIST=${{ matrix.config.dist }} ARCH=${{ matrix.config.arch }} pdebuild
     - name: archive result
