@@ -37,15 +37,18 @@ jobs:
           - os: debian
             arch: amd64
             dist: buster
+          # - os: debian
+          #   arch: armhf
+          #   dist: buster
+          # - os: debian
+          #   arch: arm64
+          #   dist: buster
+          # - os: raspbian
+          #   arch: armhf
+          #   dist: buster
           - os: debian
-            arch: armhf
-            dist: buster
-          - os: debian
-            arch: arm64
-            dist: buster
-          - os: raspbian
-            arch: armhf
-            dist: buster
+            arch: amd64
+            dist: bullseye
     steps:
     - uses: actions/checkout@v2
       with:
