@@ -45,7 +45,7 @@ NAME="$OS-$DIST-$ARCH"
 if [ "$ARCH" == "armel" ] && [ "$(dpkg --print-architecture)" != "armel" ]; then
     DEBOOTSTRAP="qemu-debootstrap"
 fi
-if [ "$ARCH" == "armhf" ] && [ "$(dpkg --print-architecture)" != "armhf" ]; then
+if [ "$ARCH" == "armhf" ] && [ "$(dpkg --print-architecture)" != "armhf" ] && [ "$(dpkg --print-architecture)" != "arm64" ]; then
     DEBOOTSTRAP="qemu-debootstrap"
 fi
 if [ "$ARCH" == "arm64" ] && [ "$(dpkg --print-architecture)" != "arm64" ]; then
@@ -55,7 +55,11 @@ fi
 DEBOOTSTRAPOPTS=("${DEBOOTSTRAPOPTS[@]}" "--arch=$ARCH")
 BASETGZ="/var/cache/pbuilder/$NAME-base.tgz"
 DISTRIBUTION="$DIST"
-BUILDRESULT="$GITHUB_WORKSPACE/result/"
+if [ -n "$GITHUB_WORKSPACE" ]; then
+    BUILDRESULT="$GITHUB_WORKSPACE/result/$NAME"
+else
+    BUILDRESULT="$HOME/robotraconteur_debian_build/result/$NAME"
+fi
 APTCACHE="/var/cache/pbuilder/$NAME/aptcache/"
 BUILDPLACE="/var/cache/pbuilder/build"
 HOOKDIR="/var/cache/pbuilder/hook.d/"
