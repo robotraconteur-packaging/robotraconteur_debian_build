@@ -1,3 +1,9 @@
+robotraconteur (0.16.0-1~bullseye) bullseye; urgency=medium
+
+  * Version v0.16.0 release
+
+ -- John Wason <wason@wasontech.com>  Sat, 04 Feb 2023 22:33:03 -0500
+
 robotraconteur (0.15.4-1~bullseye) bullseye; urgency=medium
 
   * Version v0.15.4 release
