@@ -16,8 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: pip
-      run: 
-        python -m pip install --upgrade pyopenssl
+      run: |
+        python3 -m pip install --upgrade pyopenssl
         python3 -m pip install --user pygithub
     - name: Update package version
       run: python3 scripts/update_version.py
