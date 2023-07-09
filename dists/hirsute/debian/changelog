@@ -1,3 +1,9 @@
+robotraconteur (0.17.0-1~hirsute) hirsute; urgency=medium
+
+  * Version v0.17.0 release
+
+ -- John Wason <wason@wasontech.com>  Sun, 09 Jul 2023 02:05:51 +0000
+
 robotraconteur (0.16.0-2~hirsute) hirsute; urgency=medium
 
   * Disable testing
